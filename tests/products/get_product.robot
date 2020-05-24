@@ -16,8 +16,7 @@ Get Unique Product
     ${id}=                 Convert To String       ${unique.json()['id']} 
     ${resp}=               Get Product             ${id}
 
-    Status Should Be       200                    ${resp}   
-
+    Status Should Be       200                    ${resp}  
     Should Be Equal        ${resp.json()['title']}      ${product['title']}
 
 Product Not Found
@@ -26,3 +25,18 @@ Product Not Found
     ${resp}=               Get Product             1500
 
     Status Should Be       404                    ${resp} 
+
+Get Products List
+    [tags]                success 
+
+    ${list}=              Get Json                list.json
+    ${items}=             Set Variable            ${list['data']}
+
+    FOR       ${item}     IN                      @{items}
+                          Post Product            ${item}  before_remove  
+    END 
+
+    ${resp}=               Get Produtcs
+
+    Status Should Be       200                    ${resp}
+    Should Not Be Empty                           ${resp.json()['data']}  

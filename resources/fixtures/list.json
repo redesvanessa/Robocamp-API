@@ -1,0 +1,34 @@
+{
+    "data":[
+        {
+            "title": "Produto 1",
+            "category": "Consoles",
+            "price": "19.99",
+            "descripition": "Lista Produto 1",
+            "producers": [
+                "NeoGeo"
+            ],
+            "cover": "prod1.jpg"
+        },
+        {
+            "title": "Produto 2",
+            "category": "Nintendo",
+            "price": "99.99",
+            "descripition": "Lista Produto 2",
+            "producers": [
+                "NeoGeo"
+            ],
+            "cover": "prod2.jpg"
+        },
+        {
+            "title": "Produto 3",
+            "category": "Atari",
+            "price": "199.99",
+            "descripition": "Produto 3",
+            "producers": [
+                "NeoGeo"
+            ],
+            "cover": "prod3.jpg"
+        }
+    ]
+}
