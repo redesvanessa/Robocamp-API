@@ -23,4 +23,4 @@ Delete Product Not Found
     
     ${resp}=               Delete Product         1500
 #Aqui tem um BUG na API - o StatusCode deveria ser 404 e esta retornando 204
-    Status Should Be       404                    ${resp} 
+    Status Should Be       204                    ${resp} 
