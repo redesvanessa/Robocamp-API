@@ -5,7 +5,7 @@ Documentation           POST /products
 Resource                ../../resources/services.robot
 Resource                ../../resources/fixtures/helpers.robot
 
-Suite Setup             Auth Token      ${user_email}    ${user_pass}
+Suite Setup             Set Suite Var Auth Token      ${user_email}    ${user_pass}
 
 ***Test Cases***
 Create a new Product

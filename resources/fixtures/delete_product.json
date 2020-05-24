@@ -1,0 +1,10 @@
+{
+    "title": "Neo Geo",
+    "category": "Consoles",
+    "price": "299.99",
+    "descripition": "Um jogo de rico.",
+    "producers": [
+        "NeoGeo"
+    ],
+    "cover": "neogeo.jpg"
+}

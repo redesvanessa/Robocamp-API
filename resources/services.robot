@@ -13,7 +13,7 @@ ${user_email}           vanessaredes@yahoo.com.br
 ${user_pass}            123456
 
 ***Keywords***
-Auth Token
+Set Suite Var Auth Token
     [Arguments]     ${email}         ${senha}
     Create Session         pixel     ${base_url}
 
@@ -26,8 +26,19 @@ Auth Token
     ${token}         Convert To String     JWT ${resp.json()['token']}
     Set Suite Variable       ${token}
 
+Post Token
+    [Arguments]     ${email}         ${senha}
+    Create Session         pixel     ${base_url}
+
+    &{headers}=      Create Dictionary     Content-Type=application/json
+    &{payload}=      Create Dictionary     email=${email}          password=${senha} 
+
+    ${resp}=         Post Request          pixel       /auth       data=${payload}    headers=${headers}
+
+    [Return]            ${resp}
+
 Post Product
-    [Arguments]        ${payload}     ${token}      ${remove}    
+    [Arguments]        ${payload}    ${remove}    
 
     Run Keyword if      "${remove}" == "before_remove" 
     ...                 Remove Product By Title   ${payload['title']}
@@ -35,6 +46,26 @@ Post Product
     Create Session      pixel                  ${base_url}
     &{headers}=         Create Dictionary       Authorization=${token}    Content-Type=application/json       
     
-    ${resp}=            Post Request        pixel       /products       data=${payload}         headers=${headers}  
+    ${resp}=            Post Request        pixel       /products         data=${payload}         headers=${headers}  
+
+    [Return]            ${resp}
+
+Get Product
+    [Arguments]        ${id}
+
+    Create Session      pixel                  ${base_url}
+    &{headers}=         Create Dictionary       Authorization=${token}    Content-Type=application/json  
+
+    ${resp}=            Get Request        pixel       /products/${id}    headers=${headers}  
+
+    [Return]            ${resp}
+
+Delete Product
+    [Arguments]        ${id}
+
+    Create Session      pixel                  ${base_url}
+    &{headers}=         Create Dictionary       Authorization=${token}    Content-Type=application/json  
+
+    ${resp}=            Delete Request        pixel       /products/${id}    headers=${headers}  
 
     [Return]            ${resp}
