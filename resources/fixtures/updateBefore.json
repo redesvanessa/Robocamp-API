@@ -1,0 +1,10 @@
+{
+    "title": "Donkey Kong Nintendo Wii",
+    "category": "Super Nintendo",
+    "price": "100.99",
+    "descripition": "Jogo do Nintendo Wii.",
+    "producers": [
+        "Nintendo"
+    ],
+    "cover": "donkey-kongWii.jpg"
+}
