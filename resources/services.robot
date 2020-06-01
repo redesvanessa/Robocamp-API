@@ -13,27 +13,26 @@ ${user_email}           vanessaredes@yahoo.com.br
 ${user_pass}            123456
 
 ***Keywords***
+#### Hooks ####
 Set Suite Var Auth Token
-    [Arguments]     ${email}         ${senha}
-    Create Session         pixel     ${base_url}
-
-
-    &{headers}=      Create Dictionary     Content-Type=application/json
-    &{payload}=      Create Dictionary     email=${email}          password=${senha} 
-
-    ${resp}=         Post Request          pixel       /auth       data=${payload}    headers=${headers}    
-
+    [Arguments]         ${email}         ${senha}
+   
+    ${resp}          Post Token            ${email}         ${senha}
     ${token}         Convert To String     JWT ${resp.json()['token']}
+
     Set Suite Variable       ${token}
 
+#### Steps ####
+
 Post Token
-    [Arguments]     ${email}         ${senha}
-    Create Session         pixel     ${base_url}
+    [Arguments]         ${email}         ${senha}
 
-    &{headers}=      Create Dictionary     Content-Type=application/json
-    &{payload}=      Create Dictionary     email=${email}          password=${senha} 
+    Create Session      pixel     ${base_url}
 
-    ${resp}=         Post Request          pixel       /auth       data=${payload}    headers=${headers}
+    &{headers}=         Create Dictionary     Content-Type=application/json
+    &{payload}=         Create Dictionary     email=${email}          password=${senha} 
+
+    ${resp}=            Post Request          pixel       /auth       data=${payload}    headers=${headers}
 
     [Return]            ${resp}
 
@@ -71,8 +70,7 @@ Get Produtcs
 Put Product 
     [Arguments]        ${id}        ${payload}      ${remove} 
 
-    Run Keyword if      "${remove}" == "before_remove" 
-    ...                 Remove Product By Title   ${payload['title']}
+    Remove Product By Title   ${payload['title']}
 
     Create Session      pixel                  ${base_url}
     &{headers}=         Create Dictionary       Authorization=${token}    Content-Type=application/json  
